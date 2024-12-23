@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+    <form method= "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{ new_car_form }}
+        
+
+        <input type="submit" value="cadastrar" class="btn-primary">
+        
+    </form>
+</div>
+{% endblock  %}

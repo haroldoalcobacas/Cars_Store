@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Título Padrão{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
+</head>
+<body>
+  <header>
+    <div class="interface" id="interface">
+      <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Logotipo do site">
+      </div>
+      <nav class="menu-desktop">
+        <ul>
+          {% if user.is_authenticated %}
+            <li>Olá, {{ user.username }}</li>
+            <li><a href="{% url 'cars_list' %}">Carros</a></li>
+            <li><a href=""> Cadastrar</a></li>
+            
+            <li><a href=""> Sair </a></li>
+        {% endif %}   
+        
+        {% if not user.is_authenticated %}
+            <li><a href="{% url 'cars_list' %}">Carros</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Cadastre-se</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <div class="btn-abrir-menu" id="btn-menu">
+        <i class="bi bi-list"></i>
+      </div>
+      <div class="menu-mobile" id="menu-mobile">
+        <div class="btn-fechar">
+          <i class="bi bi-x-lg"></i>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#sobre-mim">Sobre</a></li>
+            <li><a href="#especialidades">Nossas Lojas</a></li>
+            <li><a href="#portifolio">Contatos</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="overlay-menu" id="overlay-menu"></div>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Alcobaças Multimarcas</p>
+  </footer>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
